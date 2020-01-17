@@ -1,6 +1,9 @@
+clear all;close all
+
 systemSize = 100;
 sys = zeros(systemSize,systemSize);
-
+occupyRate = 0.8;
+occupySite0 = randsample(systemSize^2,systemSize^2*occupyRate);
 
 year = 2000;
 dt = 1;
@@ -11,7 +14,7 @@ r=lognrnd(G0,sigG0,[1,length(occupySite0)]);
 hmax = 4;
 C0   = -3; %mean=exp(C0)=0.05
 sigC0= 1.1;%max=0.51,min=0.005;
-occupyRate = 0.8;
+
 maxAge  = 200;
 satAge  = 70;%biomass levels off with age 
 seedAge = 10;%start to generate seeds
@@ -26,7 +29,7 @@ age  = zeros(systemSize^2,numt);
 biom = zeros(systemSize^2,numt);
 h    = zeros(systemSize^2,numt);
 
-occupySite0 = randsample(systemSize^2,systemSize^2*occupyRate);
+
 G(occupySite0,1) = lognrnd(G0,sigG0,[1,length(occupySite0)]);
 C(occupySite0,1) = lognrnd(C0,sigC0,[1,length(occupySite0)]);
 age(occupySite0,1) = datasample([1:1:maxAge],length(occupySite0));%uniform distr.
